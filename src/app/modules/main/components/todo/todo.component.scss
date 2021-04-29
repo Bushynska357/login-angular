@@ -1,0 +1,90 @@
+:host{
+    background: linear-gradient(18deg, rgba(243,115,116,1) 43%, rgba(92,95,232,1) 43%);
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 80px;
+}
+.card{
+    margin: 80px 30px auto;
+    width: 800px;
+    background: #fff;
+    border-radius: 25px;
+    padding-bottom: 30px;
+    .header{
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        border-bottom:1px solid #e0e9f1;
+        font-family: 'Roboto', sans-serif;
+        padding: 30px 30px;
+        .date{
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            
+            h1{
+                font-size: 35px;
+                color: #666afb;
+                font-weight: 500;
+            }
+            .month{
+                color:#cdcdd9;
+                font-size: 18px;
+            }
+        }
+        .tasks{
+            
+            color:#cdcdd9;
+            font-size: 18px;
+        }
+        .addBtn{
+            position: absolute;
+            bottom: -25px;
+            right: 30px;
+            background-color: #f37374;
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            .plus{
+                color: #fff;
+                font-size: 24px;
+            }
+        }
+    }
+   
+    .list-tasks{
+       
+        .task{
+            display: flex;
+            border-bottom: 1px solid #d3d3e1;
+            align-items: center;
+            padding:10px 30px;
+            [type="checkbox"]:checked {
+                content: "";
+                filter:invert(19%) sepia(91%) saturate(932%) hue-rotate(300deg) brightness(148%) contrast(94%); 
+              }
+            .text-input{
+                outline: none;
+                border: none;
+                font-family: 'Roboto', sans-serif;
+                font-size: 18px;
+                color: #82829c;
+                width: 100%;
+                padding: 20px 10px;
+                &::placeholder {
+                    color: #d6d6e4 ;
+                  }
+            }
+            .time{
+                font-family: 'Roboto', sans-serif;
+                font-size: 14px;
+                color: #82829c;
+            }
+        }
+    }
+     
+}
