@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
 import { BehaviorSubject, from, Observable } from 'rxjs';
 import { User } from './user';
@@ -11,6 +11,11 @@ export class AuthService {
 
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser$: Observable<User>;
+  public currentUser: {
+    payload: User,
+    accessToken: string,
+    refreshToken: string
+  };
 
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
@@ -21,8 +26,9 @@ export class AuthService {
     if (this.getStorage){
       this.removeCurrentStorage();
     }
-
-    console.log(email, password);
+ 
+    // console.log(  this.currentUserSubject.value);
+    
     return this.http.post<any>(`${environment.baseUrl}/auth/sign-in`, { email, password })
     .pipe(tap( user => {
         if (user) {
@@ -33,7 +39,7 @@ export class AuthService {
             accessToken: user.accessToken,
             refreshToken: user.refreshToken
           };
-
+          
           this.setStorage(user);
         }
         return user;
@@ -56,11 +62,13 @@ export class AuthService {
   public setStorage(user): void{
     localStorage.setItem('currentUser', JSON.stringify(user));
     this.currentUserSubject.next(user);
+
+    this.currentUser = user;
   }
 
   public removeCurrentStorage(): void{
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
   }
-  // TODO methods for user managment
+  
 }

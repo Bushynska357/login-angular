@@ -30,10 +30,6 @@ export class LoginComponent implements OnInit {
     console.log( 'Form:', this.form.controls.password.value);
     if (this.form.valid){
       this.authService.login( this.form.controls.email.value, this.form.controls.password.value)
-      // .pipe(catchError ( err => {
-      //   console.log(err);
-      //   return of(null);
-      // } ))
       .subscribe(res => {
         console.log(res);
         this.router.navigate(['todo']);

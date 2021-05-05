@@ -11,7 +11,7 @@
         <button type="button" class="addBtn" (click)="addInput()"><div class="plus">&#43;</div></button>
     </div>
     
-    <div class="list-tasks"  *ngFor="let item of tasks">
+    <div class="list-tasks"  *ngFor="let item of tasks$ | async">
         
         <div class="task" >
             <input  type='checkbox'>
