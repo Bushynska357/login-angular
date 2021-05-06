@@ -14,6 +14,8 @@ export class AuthService {
   public currentUser$: Observable<CurrentUser>;
   public currentUser: CurrentUser;
 
+  public expDate;
+
   constructor(private http: HttpClient) {
     this.currentUser = this.getStorage();
     this.currentUserSubject = new BehaviorSubject<CurrentUser>(this.currentUser);
@@ -70,5 +72,7 @@ export class AuthService {
   public removeCurrentStorage(): void{
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
+
+    this.currentUser = null;
   }
 }

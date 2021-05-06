@@ -10,14 +10,16 @@ constructor(private auth: AuthService,
             private router: Router
     ){}
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const authToken = this.auth.currentUser.accessToken;
+        const authToken = this.auth.currentUser?.accessToken;
 
-        const authReq = req.clone({
-            headers: req.headers.set('x-auth-token', authToken)
-        });
+        if (authToken){
+            const authReq = req.clone({
+                headers: req.headers.set('x-auth-token', authToken)
+            });
 
-        return next.handle(authReq);
-        // throw new Error('Method not implemented.');
+            return next.handle(authReq);
+        }
+        return next.handle(req);
     }
 
 }
