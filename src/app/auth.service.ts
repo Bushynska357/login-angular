@@ -2,23 +2,21 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
 import { BehaviorSubject, from, Observable } from 'rxjs';
-import { User } from './user';
+import { User } from './models/user';
+import { CurrentUser } from './models/currentUser';
 import {environment} from '../environments/environment';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
 
-  private currentUserSubject: BehaviorSubject<User>;
-  public currentUser$: Observable<User>;
-  public currentUser: {
-    payload: User,
-    accessToken: string,
-    refreshToken: string
-  };
+  private currentUserSubject: BehaviorSubject<CurrentUser>;
+  public currentUser$: Observable<CurrentUser>;
+  public currentUser: CurrentUser;
 
   constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+    this.currentUser = this.getStorage();
+    this.currentUserSubject = new BehaviorSubject<CurrentUser>(this.currentUser);
     this.currentUser$ = this.currentUserSubject.asObservable();
   }
 
@@ -26,9 +24,7 @@ export class AuthService {
     if (this.getStorage){
       this.removeCurrentStorage();
     }
- 
     // console.log(  this.currentUserSubject.value);
-    
     return this.http.post<any>(`${environment.baseUrl}/auth/sign-in`, { email, password })
     .pipe(tap( user => {
         if (user) {
@@ -39,7 +35,6 @@ export class AuthService {
             accessToken: user.accessToken,
             refreshToken: user.refreshToken
           };
-          
           this.setStorage(user);
         }
         return user;
@@ -55,8 +50,14 @@ export class AuthService {
     return JSON.parse(jsonPayload);
   }
 
-  public getStorage(): void{
-    localStorage.getItem('currentUser');
+  public getStorage(): CurrentUser {
+    const rawUser = localStorage.getItem('currentUser');
+
+    if (!rawUser) {
+      return null;
+    }
+
+    return JSON.parse(rawUser);
   }
 
   public setStorage(user): void{
@@ -70,5 +71,4 @@ export class AuthService {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
   }
-  
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Task } from 'src/app/models/task';
 import { TodoService } from '../../todoService';
 
 @Component({
@@ -9,21 +11,20 @@ import { TodoService } from '../../todoService';
 export class TodoComponent implements OnInit {
 
   task: string;
-  tasks$;
+  tasks$: Observable<Task>;
 
-  constructor(public todoService:TodoService) { }
+  constructor(public todoService: TodoService) { }
 
   ngOnInit(): void {
-    this.tasks$ = this.getAllTasks()
+    this.tasks$ = this.getAllTasks();
     console.log(this.tasks$);
-    
   }
 
-  getAllTasks(){
-   return this.todoService.getTasks()
+  getAllTasks(): Observable<Task>{
+   return this.todoService.getTasks();
   }
 
   addInput(){
-    this.tasks$.push(this.tasks$.length);
+  //  return this.tasks$.push(this.tasks$.length);
   }
 }

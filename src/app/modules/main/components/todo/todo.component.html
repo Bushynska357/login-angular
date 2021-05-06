@@ -14,9 +14,9 @@
     <div class="list-tasks"  *ngFor="let item of tasks$ | async">
         
         <div class="task" >
-            <input  type='checkbox'>
-            <input class="text-input" name="task" placeholder="Enter task"/>
-            <div class="time">12:35</div>
+            <input  type='checkbox' [checked]="item.selected">
+            <input class="text-input" value="{{item.text}}" name="task" placeholder="Enter task" />
+            <div class="time">{{item.time}}</div>
         </div>
         <!-- <div class="task">
             <input class="checkbox" type='checkbox'>
