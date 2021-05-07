@@ -67,25 +67,43 @@
                 content: "";
                 filter:invert(19%) sepia(91%) saturate(932%) hue-rotate(300deg) brightness(148%) contrast(94%); 
               }
-
-            .actionButtons{
+              .blockTime{
                 display: flex;
-                align-items: center;
-                    button{
-                        background: transparent;
-                        border: none;
-                        outline: none;
-                        padding: 5px;
-                        cursor: pointer;
-                        &:first-child{
-                           color: #f37374;
-                        }
-                        &:last-child{
-                            color: rgb(86, 110, 38);
-                        }
-                    }
-
+                flex-direction: column;
+                align-items: flex-end;
+                width: 10%;
+                button{
+                    display: none;
+                }
             }
+             
+            &:hover{
+                border-bottom:none;
+                -webkit-box-shadow: 0px -5px 6px -3px rgba(211, 211, 225, 0.6) inset;
+                -moz-box-shadow: 0px -5px 6px -3px rgba(211, 211, 225, 0.6) inset;
+                box-shadow: 0px -5px 6px -3px rgba(211, 211, 225, 0.6) inset;
+                .blockTime{
+                        button{
+                            display: flex;
+                            align-items: center;
+                            background: transparent;
+                            border: none;
+                            outline: none;
+                            padding: 5px;
+                            cursor: pointer;
+                            &:first-child{
+                               color: #f37374;
+                            }
+                            &:last-child{
+                                color: rgb(86, 110, 38);
+                            }        
+                }
+                .time{
+                    display: none;
+                }
+            }
+            }
+         
             .text-input{
                 outline: none;
                 border: none;
@@ -99,6 +117,7 @@
                   }
             }
             .time{
+                display: flex;
                 font-family: 'Roboto', sans-serif;
                 font-size: 14px;
                 color: #82829c;
@@ -107,3 +126,6 @@
     }
      
 }
+
+
+

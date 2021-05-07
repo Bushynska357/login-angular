@@ -10,13 +10,17 @@ import { TodoService } from '../../todoService';
   styleUrls: ['./todo.component.scss']
 })
 export class TodoComponent implements OnInit {
-  @ViewChild('box') box: ElementRef;
+  // @ViewChild('box') box: ElementRef;
 
   lengthList;
   tasks$: Observable<Task[]>;
   tasks: Task[];
   focus = false;
   currentTime;
+  taskName: string;
+  day = new Intl.DateTimeFormat('en-US', { weekday: 'long'}).format(new Date());
+  month = new Intl.DateTimeFormat('en-US', {month: 'long'}).format(new Date());
+  numberOfDay = new Intl.DateTimeFormat('en-US', { day: 'numeric'}).format(new Date());
 
 
   constructor(public todoService: TodoService) { }
@@ -25,22 +29,21 @@ export class TodoComponent implements OnInit {
     this.tasks$ = this.todoService.currentTask$;
   }
 
-  addInput(){
-    this.currentTime = new Date().toLocaleTimeString('en-GB', { hour: 'numeric', minute: 'numeric' });
-    console.log((this.tasks));
-    let newTask = new Task();
-    // this.tasks.unshift(newTask);
-    newTask = {
+  addTask(){
+    const newTask = {
       isComplete: false,
       text: null,
       selected: false,
-      time : this.currentTime
-    }
-    
+      time: +new Date(),
+    };
     return this.todoService.createTask(newTask);
   }
 
-  saveTask(){
+  saveChanges(item: Task) {
+    return this.todoService.updateTask(item);
+  }
 
+  removeTask(item){
+    return this.todoService.removeTask(item);
   }
 }

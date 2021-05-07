@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth.service';
 import { Task } from 'src/app/models/task';
@@ -24,8 +24,8 @@ export class TodoService {
   getTasks(): void{
    this.http.get<Task[]>(`${environment.baseUrl}/list`)
     .subscribe(res => {
-      console.log(res[res.length - 1]);
       this.currentTaskSubject.next(res);
+      console.log(this.currentTaskSubject.value);
       
     });
 
@@ -33,9 +33,29 @@ export class TodoService {
 
   }
 
-  createTask(newTask){
+  createTask(newTask): Subscription {
+    console.log(newTask);
+    // newTask.time  = String(newTask.time )
+    console.log(newTask);
     return this.http.post<Task>(`${environment.baseUrl}/list`, newTask).subscribe(x => {
+      newTask.id = x.id;
+      console.log(newTask);
       this.currentTaskSubject.next([newTask, ...this.currentTaskSubject.value]);
     });
   }
+
+  updateTask(item) {
+   console.log(item);
+   return this.http.put<Task>(`${environment.baseUrl}/list/${item.id}`, item).subscribe(x => {
+    // [newTask, ...this.currentTaskSubject.value]
+    this.currentTaskSubject.next(this.currentTaskSubject.value.splice(item, item.id - 1, x));
+   });
+  }
+
+  removeTask(item): Subscription {
+    return this.http.delete<Task>(`${environment.baseUrl}/list/${item.id}`).subscribe(res => {
+        this.currentTaskSubject.next(this.currentTaskSubject.value.filter(x => x.id !== res.id));
+    });
+  }
+
 }

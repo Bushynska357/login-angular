@@ -2,24 +2,23 @@
 
     <div class="header">
         <div class="date">
-            <h1>Thuesday,<span> 10th</span></h1>
-            <p class="month">December</p>
+            <h1>{{day}},<span> {{numberOfDay}}th</span></h1>
+            <p class="month">{{month}}</p>
         </div>
         <div class="tasks">
             {{(tasks$ | async).length}} Tasks
         </div>
-        <button type="button" class="addBtn" (click)="addInput()"><div class="plus">&#43;</div></button>
+        <button type="button" class="addBtn" (click)="addTask()"><div class="plus">&#43;</div></button>
     </div>
     
     <div class="list-tasks"  *ngFor="let item of tasks$ | async">
         
-        <div class="task">
-            <input  type='checkbox' [checked]="item.selected">
-            <input class="text-input"  (focus)="focus = true" (blur)="focus = false" value="{{item.text}}" name="task" placeholder="Enter task" />
-            <div class="time" *ngIf='focus == false'>{{item.time || currentTime}}</div>
-            <div class="actionButtons" *ngIf='focus == true'>
-                <button>✖</button>
-                <button (click)="saveTask()">✔</button>
+        <div class="task" >
+            <input  type='checkbox' (change)="saveChanges(item)" [checked]="item.selected" [(ngModel)]="item.selected">
+            <input class="text-input"   (blur)="saveChanges(item)"  name="task" placeholder="Enter task"  [(ngModel)]="item.text" />
+            <div class="blockTime">
+                <div class="time">{{item.time | date:"h:mm a"}}</div>
+                <button (click)="removeTask(item)">✖</button>
             </div>
         </div>      
        
