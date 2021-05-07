@@ -3,4 +3,6 @@ export class  User{
     fullname: string;
     email: string;
     role: string;
+    exp?: number;
+    iat?: number;
 }

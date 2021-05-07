@@ -16,8 +16,6 @@ export class TodoService {
   constructor(private http: HttpClient,
               public authService: AuthService
     ) {
-      // this.currentTaskSubject = new BehaviorSubject<Task>();
-      // this.currentTask$ = this.currentTaskSubject.asObservable();
       this.getTasks();
     }
 
@@ -26,17 +24,10 @@ export class TodoService {
     .subscribe(res => {
       this.currentTaskSubject.next(res);
       console.log(this.currentTaskSubject.value);
-      
     });
-
-    // return tasks$;
-
   }
 
   createTask(newTask): Subscription {
-    console.log(newTask);
-    // newTask.time  = String(newTask.time )
-    console.log(newTask);
     return this.http.post<Task>(`${environment.baseUrl}/list`, newTask).subscribe(x => {
       newTask.id = x.id;
       console.log(newTask);
@@ -47,7 +38,6 @@ export class TodoService {
   updateTask(item) {
    console.log(item);
    return this.http.put<Task>(`${environment.baseUrl}/list/${item.id}`, item).subscribe(x => {
-    // [newTask, ...this.currentTaskSubject.value]
     this.currentTaskSubject.next(this.currentTaskSubject.value.splice(item, item.id - 1, x));
    });
   }

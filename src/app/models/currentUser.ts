@@ -1,7 +1,7 @@
 import { User } from './user';
 
 export class CurrentUser {
-    payload: User;
+    data: User;
     accessToken: string;
     refreshToken: string;
 }

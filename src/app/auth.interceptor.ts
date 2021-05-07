@@ -6,6 +6,7 @@ import { AuthService } from './auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor{
+currentTime = new Date().getTime() / 1000;
 constructor(private auth: AuthService,
             private router: Router
     ){}
@@ -16,7 +17,13 @@ constructor(private auth: AuthService,
             const authReq = req.clone({
                 headers: req.headers.set('x-auth-token', authToken)
             });
-
+            if (this.currentTime > this.auth.currentUser.data?.exp) {
+                localStorage.removeItem('currentUser');
+                this.router.navigate(['login']);
+                console.log('Expired!');
+            }else{
+                console.log('No expired!');
+            }
             return next.handle(authReq);
         }
         return next.handle(req);
