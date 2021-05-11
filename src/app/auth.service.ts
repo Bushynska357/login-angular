@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
-import { map, tap } from 'rxjs/operators';
+import { first, map, tap } from 'rxjs/operators';
 import { BehaviorSubject, from, Observable } from 'rxjs';
 import { User } from './models/user';
 import { CurrentUser } from './models/currentUser';
 import {environment} from '../environments/environment';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root',
 })
@@ -15,8 +16,10 @@ export class AuthService {
   public currentUser: CurrentUser;
 
   public expDate;
+  public isRefresh = false;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private router: Router) {
     this.currentUser = this.getStorage();
     this.currentUserSubject = new BehaviorSubject<CurrentUser>(this.currentUser);
     this.currentUser$ = this.currentUserSubject.asObservable();
@@ -58,7 +61,6 @@ export class AuthService {
     if (!rawUser) {
       return null;
     }
-
     return JSON.parse(rawUser);
   }
 
@@ -75,4 +77,26 @@ export class AuthService {
 
     this.currentUser = null;
   }
+
+  public refreshToken(): Observable<any> {
+    console.log('REFRESH');
+
+    this.isRefresh = true;
+
+    return this.http.post<any>(`${environment.baseUrl}/auth/refresh`,  {refreshToken: this.currentUser.refreshToken}).pipe(
+      tap(res => {
+        console.log('refresh');
+        const newPayload = this.parseJwt(res.accessToken);
+        const newUser = {
+          data: newPayload,
+          accessToken: res.accessToken,
+          refreshToken: res.refreshToken
+        };
+        console.log(newUser);
+
+        this.isRefresh = false;
+        this.setStorage(newUser);
+      })
+    );
+    }
 }
