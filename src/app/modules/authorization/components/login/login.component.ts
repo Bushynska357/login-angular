@@ -32,7 +32,11 @@ export class LoginComponent implements OnInit {
       this.authService.login( this.form.controls.email.value, this.form.controls.password.value)
       .subscribe(res => {
         console.log(res);
-        this.router.navigate(['todo']);
+        if (res){
+           this.router.navigate(['todo']);
+        }else if (res == null){
+          window.alert('Something went wrong');
+        }
       });
     }
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders} from '@angular/common/http';
-import { first, map, tap } from 'rxjs/operators';
-import { BehaviorSubject, from, Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import { catchError, first, map, tap } from 'rxjs/operators';
+import { BehaviorSubject, from, Observable, of, throwError } from 'rxjs';
 import { User } from './models/user';
 import { CurrentUser } from './models/currentUser';
 import {environment} from '../environments/environment';
@@ -29,7 +29,7 @@ export class AuthService {
     if (this.getStorage){
       this.removeCurrentStorage();
     }
-    // console.log(  this.currentUserSubject.value);
+
     return this.http.post<any>(`${environment.baseUrl}/auth/sign-in`, { email, password })
     .pipe(tap( user => {
         if (user) {
@@ -74,29 +74,31 @@ export class AuthService {
   public removeCurrentStorage(): void{
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
-
     this.currentUser = null;
   }
 
   public refreshToken(): Observable<any> {
-    console.log('REFRESH');
-
     this.isRefresh = true;
 
     return this.http.post<any>(`${environment.baseUrl}/auth/refresh`,  {refreshToken: this.currentUser.refreshToken}).pipe(
       tap(res => {
-        console.log('refresh');
         const newPayload = this.parseJwt(res.accessToken);
+
         const newUser = {
           data: newPayload,
           accessToken: res.accessToken,
           refreshToken: res.refreshToken
         };
-        console.log(newUser);
 
         this.isRefresh = false;
         this.setStorage(newUser);
+      }), catchError( (err: HttpErrorResponse) => {
+        console.log('refreshError', err);
+        this.isRefresh = false;
+        this.removeCurrentStorage();
+        this.router.navigate(['login']);
+        return throwError(err);
       })
-    );
+      );
     }
 }
