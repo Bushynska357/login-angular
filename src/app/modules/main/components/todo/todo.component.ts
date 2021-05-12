@@ -4,6 +4,7 @@ import { map, tap } from 'rxjs/operators';
 import { Task } from 'src/app/models/task';
 import { TodoService } from '../../todoService';
 
+
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',
@@ -21,7 +22,7 @@ export class TodoComponent implements OnInit {
   day = new Intl.DateTimeFormat('en-US', { weekday: 'long'}).format(new Date());
   month = new Intl.DateTimeFormat('en-US', {month: 'long'}).format(new Date());
   numberOfDay = new Intl.DateTimeFormat('en-US', { day: 'numeric'}).format(new Date());
-
+  date = new Date();
 
   constructor(public todoService: TodoService) { }
 

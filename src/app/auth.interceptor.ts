@@ -19,14 +19,14 @@ constructor(private auth: AuthService,
         if (!isRefresh && accessToken){
 
             if (currentTime > this.auth.currentUser.data?.exp) {
-                // return this.auth.refreshToken().pipe(
-                //     switchMap((res) => {
-                //         const clone = req.clone({
-                //             headers: req.headers.set('x-auth-token', res.accessToken)
-                //         });
-                //         return next.handle(clone);
-                //     })
-                // );
+                return this.auth.refreshToken().pipe(
+                    switchMap((res) => {
+                        const clone = req.clone({
+                            headers: req.headers.set('x-auth-token', res.accessToken)
+                        });
+                        return next.handle(clone);
+                    })
+                );
             } else {
                 const clone = req.clone({
                     headers: req.headers.set('x-auth-token', accessToken)

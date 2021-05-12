@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TodoComponent } from './components/todo/todo.component';
 import { RouterModule } from '@angular/router';
+import { FormatPipe } from 'src/app/format.pipe';
 
 
 
 @NgModule({
-  declarations: [TodoComponent],
+  declarations: [TodoComponent, FormatPipe ],
   imports: [
     CommonModule,
     FormsModule,
@@ -18,7 +19,7 @@ import { RouterModule } from '@angular/router';
       ]
     ),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule, FormatPipe]
 })
 export class MainModule {
  }

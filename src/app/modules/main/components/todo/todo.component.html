@@ -2,8 +2,8 @@
 
     <div class="header">
         <div class="date">
-            <h1>{{day}},<span> {{numberOfDay}}th</span></h1>
-            <p class="month">{{month}}</p>
+            <h1>{{ date | date:"EEEE"}},<span>{{(date | date: "d")}}{{ ((date | date: "d") | format) }}</span></h1>
+            <p class="month">{{ date | date:"MMMM"}}</p>
         </div>
         <div class="tasks">
             {{(tasks$ | async).length}} Tasks
