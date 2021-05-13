@@ -1,5 +1,5 @@
-<div class="login_block">
-    <h2>Login</h2>
+<div class="register_block">
+    <h2>Register</h2>
     <form [formGroup]='form' (ngSubmit)="submit()">
         
         <div class="form-group">
@@ -11,6 +11,15 @@
                 <small *ngIf = "form.get('email').errors.email">Email invalid</small>
             </div>
         </div>
+
+        <div class="form-group">
+            <label class="label">Fullname</label>
+            <input class="input" placeholder="Fullname" type="fullname" formControlName="fullname"/>
+            <div class = "validation" *ngIf = "form.get('fullname').invalid && form.get('fullname').touched">
+                <small  *ngIf = "form.get('fullname').errors.required">This field can't be empty</small>
+            </div>
+        </div>
+
         <div class="form-group">
             <label class="label">Password</label>
             <input class="input" placeholder="Password" type="password" formControlName="password"/>
@@ -21,12 +30,21 @@
                 </small>
             </div>
         </div>
+
+        <div class="form-group">
+            <label class="label">Register as</label> 
+            <select class="input" (ngModelChange)="onChange($event)"  formControlName="role">
+                <option value="admin">admin</option>
+                <option value="user">user</option>
+             </select>
+        </div>
         
         
         <button type="submit" class="btn" [disabled] = 'form.invalid'  
         [ngClass]="{'btn_primary':form.valid,
         'btn_disabled':form.invalid
-        }">Login</button>
-        <a [routerLink]="['','register']" class="btn btn_link">Register</a>
+        }">Register</button>
+        <p class="redirect">If you are already registered, please <a [routerLink]="['','login']">Log In</a></p>
+        <!-- <a href="#" class="btn btn_link">Register</a> -->
     </form>
 </div>

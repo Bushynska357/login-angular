@@ -17,6 +17,7 @@ export class AuthService {
 
   public expDate;
   public isRefresh = false;
+  public role: boolean;
 
   constructor(private http: HttpClient,
               private router: Router) {
@@ -32,7 +33,9 @@ export class AuthService {
 
     return this.http.post<any>(`${environment.baseUrl}/auth/sign-in`, { email, password })
     .pipe(tap( user => {
-        if (user) {
+      console.log(user);
+
+      if (user) {
           const payload = this.parseJwt(user.accessToken);
 
           user = {
@@ -42,9 +45,16 @@ export class AuthService {
           };
           this.setStorage(user);
         }
-        return user;
+      return user;
       })
     );
+  }
+
+  register(email, fullname, password, role): Observable<any>{
+    return this.http.post<any>(`${environment.baseUrl}/auth/sign-up`, { email, fullname, password, role})
+    .pipe(tap(newUser => {
+      console.log(newUser);
+    }));
   }
 
   parseJwt(token): any {
@@ -100,5 +110,9 @@ export class AuthService {
         return throwError(err);
       })
       );
+    }
+
+    public isAdmin(): boolean{
+      return this.currentUser.data.role === 'admin';
     }
 }

@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+import { AuthService } from 'src/app/auth.service';
 import { Task } from 'src/app/models/task';
 import { TodoService } from '../../todoService';
 
@@ -19,15 +20,17 @@ export class TodoComponent implements OnInit {
   focus = false;
   currentTime;
   taskName: string;
-  day = new Intl.DateTimeFormat('en-US', { weekday: 'long'}).format(new Date());
-  month = new Intl.DateTimeFormat('en-US', {month: 'long'}).format(new Date());
-  numberOfDay = new Intl.DateTimeFormat('en-US', { day: 'numeric'}).format(new Date());
   date = new Date();
+  role;
 
-  constructor(public todoService: TodoService) { }
+  constructor(public todoService: TodoService,
+              public authService: AuthService
+    ) { }
 
   ngOnInit(): any{
     this.tasks$ = this.todoService.currentTask$;
+    this.role = this.authService.isAdmin();
+    this.todoService.getTasks();
   }
 
   addTask(){

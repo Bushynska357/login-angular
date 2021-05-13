@@ -8,7 +8,7 @@
         <div class="tasks">
             {{(tasks$ | async).length}} Tasks
         </div>
-        <button type="button" class="addBtn" (click)="addTask()"><div class="plus">&#43;</div></button>
+        <button *ngIf='!role' type="button" class="addBtn" (click)="addTask()"><div class="plus">&#43;</div></button>
     </div>
     
     <div class="list-tasks"  *ngFor="let item of tasks$ | async">
@@ -18,7 +18,7 @@
             <input class="text-input"   (blur)="saveChanges(item)"  name="task" placeholder="Enter task"  [(ngModel)]="item.text" />
             <div class="blockTime">
                 <div class="time">{{item.time | date:"h:mm a"}}</div>
-                <button (click)="removeTask(item)">✖</button>
+                <button (click)="removeTask(item)" *ngIf='role'>✖</button>
             </div>
         </div>      
        
