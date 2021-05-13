@@ -2,7 +2,7 @@
 
     <div class="header">
         <div class="date">
-            <h1>{{ date | date:"EEEE"}},<span>{{(date | date: "d")}}{{ ((date | date: "d") | format) }}</span></h1>
+            <h1>{{ date | date:"EEEE"}},<span>{{ (date | date: "d") | ordinal }}</span></h1>
             <p class="month">{{ date | date:"MMMM"}}</p>
         </div>
         <div class="tasks">
