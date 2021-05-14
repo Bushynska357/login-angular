@@ -4,7 +4,10 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background: linear-gradient(18deg, rgba(243,115,116,1) 43%, rgba(92,95,232,1) 43%);
+    background-attachment: fixed;
 }
+
 
 .block{
     display: flex;
@@ -16,8 +19,10 @@
     padding: 20px;
     outline: none;
     font-family: 'Roboto', sans-serif;
-    margin: 0 30px;
+    // margin: 0 30px;
+    margin: auto;
     h2{
+        background: #fff;
         cursor:default;    
         padding-bottom: 20px;
         color: #5c5fe8;
@@ -25,13 +30,16 @@
     .form-group{
         display: flex;
         flex-direction: column;
+        background: #fff;
         padding-bottom: 20px;
         .label{
+            background: #fff;
             color: #5c5fe8;
             padding-bottom: 10px;
            
         }
         .input{
+            background: #fff;
             border: 1px solid darkgray;
             outline: none;
             border-radius: 10px;
@@ -47,10 +55,12 @@
           
         }
         .validation{
+            background: #fff;
             color:#f37374;
         }
     }
     .btn{
+        background: #fff;
         outline:none;
         font-weight: 400;
         border: 1px solid transparent;
@@ -63,27 +73,35 @@
     }
     
     .btn_link {
+        background: #fff;
         font-weight: 400;
         color: #5c5fe8;
         text-decoration: none;
     }
     .btn_primary{
+        background: #fff;
         color: #fff;
         background-color: #5c5fe8;
         border-color: #5c5fe8;
     }
     .btn_disabled{
+        background: #fff;
         color: #fff;
         background-color: #adceeb;
         border-color: #adceeb;
     }
     .redirect{
+        background: #fff;
         padding-top: 20px;
         font-weight: 400;
         color: #5c5fe8;
         a{
+            background: #fff;
             font-weight: 600;
             color: #5c5fe8;
         }
     }
+}
+form{
+    background: #fff;
 }

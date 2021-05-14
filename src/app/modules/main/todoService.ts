@@ -16,7 +16,7 @@ export class TodoService {
   constructor(private http: HttpClient,
               public authService: AuthService
     ) {
-
+   
     }
 
   getTasks(): void{
@@ -42,9 +42,9 @@ export class TodoService {
    });
   }
 
-  removeTask(item): Subscription {
+  removeTask(item) {
     return this.http.delete<Task>(`${environment.baseUrl}/list/${item.id}`).subscribe(res => {
-        this.currentTaskSubject.next(this.currentTaskSubject.value.filter(x => x.id !== res.id));
+      this.currentTaskSubject.next(this.currentTaskSubject.value.filter(x => x.id !== res.id));
     });
   }
 

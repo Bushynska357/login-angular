@@ -1,20 +1,13 @@
-:host{
-    background: linear-gradient(18deg, rgba(243,115,116,1) 43%, rgba(92,95,232,1) 43%);
-    background-attachment: fixed;
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    padding-bottom: 80px;
-}
 .card{
-    margin: 80px 30px auto;
+    margin: 80px auto;
     width: 800px;
     background: #fff;
     border-radius: 25px;
     padding-bottom: 30px;
     .header{
         display: flex;
+        background: #fff;
+        border-radius: 25px 25px 0 0;
         justify-content: space-between;
         position: relative;
         border-bottom:1px solid #e0e9f1;
@@ -22,25 +15,32 @@
         padding: 30px 30px;
         .date{
             display: flex;
+            background: #fff;
             flex-direction: column;
             text-align: left;
             
             h1{
+                background: #fff;
                 font-size: 35px;
                 color: #666afb;
                 font-weight: 500;
+                span{
+                    background: #fff;
+                }
             }
             .month{
+                background: #fff;
                 color:#cdcdd9;
                 font-size: 18px;
             }
         }
         .tasks{
-            
+            background: #fff;
             color:#cdcdd9;
             font-size: 18px;
         }
         .addBtn{
+            background: #fff;
             position: absolute;
             bottom: -25px;
             right: 30px;
@@ -51,6 +51,7 @@
             border-radius: 50%;
             cursor: pointer;
             .plus{
+                background: transparent;
                 color: #fff;
                 font-size: 24px;
             }
@@ -61,7 +62,8 @@
        
         .task{
             display: flex;
-            border-bottom: 1px solid #d3d3e1;
+            border-bottom: 1px solid #d3d3e1;       
+            background: #fff;
             align-items: center;
             padding:10px 30px;
             [type="checkbox"]:checked {
@@ -70,10 +72,12 @@
               }
               .blockTime{
                 display: flex;
+                background: #fff;
                 flex-direction: column;
                 align-items: flex-end;
                 width: 10%;
                 button{
+                   
                     display: none;
                 }
             }
@@ -84,8 +88,10 @@
                 -moz-box-shadow: 0px -5px 6px -3px rgba(211, 211, 225, 0.6) inset;
                 box-shadow: 0px -5px 6px -3px rgba(211, 211, 225, 0.6) inset;
                 .blockTime{
+                    
                         button{
                             display: flex;
+                            
                             align-items: center;
                             background: transparent;
                             border: none;
@@ -106,6 +112,7 @@
             }
          
             .text-input{
+                background: #fff;
                 outline: none;
                 border: none;
                 font-family: 'Roboto', sans-serif;
@@ -118,6 +125,7 @@
                   }
             }
             .time{
+                background: #fff;
                 display: flex;
                 font-family: 'Roboto', sans-serif;
                 font-size: 14px;
