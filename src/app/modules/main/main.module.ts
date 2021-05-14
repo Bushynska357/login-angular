@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TodoComponent } from './components/todo/todo.component';
 import { RouterModule } from '@angular/router';
 import {  OrdinalPipe } from 'src/app/format.pipe';
+import { TodoRoutingModule } from './todo-routing.module';
 
 
 
@@ -13,11 +14,7 @@ import {  OrdinalPipe } from 'src/app/format.pipe';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forChild(
-      [
-        {path: '', component: TodoComponent}
-      ]
-    ),
+    TodoRoutingModule
   ],
   exports: [RouterModule]
 })
