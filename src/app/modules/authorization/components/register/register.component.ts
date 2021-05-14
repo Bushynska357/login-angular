@@ -1,3 +1,4 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -6,7 +7,15 @@ import { AuthService } from 'src/app/auth.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
+  animations: [
+    trigger('register', [
+      transition('void => *', [
+        style({ opacity: 0, transform: 'translate(-600px, 0)'}),
+        animate('1.2s', style({ opacity: 1, transform: 'translate(0, 0)' })),
+      ]),
+    ])
+  ]
 })
 export class RegisterComponent implements OnInit {
 

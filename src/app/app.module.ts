@@ -8,10 +8,9 @@ import { AppComponent } from './app.component';
 import { AuthInterceptor } from './auth.interceptor';
 
 import { HttpErrorInterceptor } from './http-error.interceptor';
-import { AuthorizationModule } from './modules/authorization/authorization.module';
-import { TodoComponent } from './modules/main/components/todo/todo.component';
-import { MainModule } from './modules/main/main.module';
 
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -21,6 +20,7 @@ import { MainModule } from './modules/main/main.module';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

@@ -1,3 +1,4 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
@@ -9,7 +10,15 @@ import { TodoService } from '../../todoService';
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',
-  styleUrls: ['./todo.component.scss']
+  styleUrls: ['./todo.component.scss'],
+  animations: [
+    trigger('todo', [
+      transition('void => *', [
+        style({ opacity: 0, transform: 'translate(-600px, 0)'}),
+        animate('1.2s', style({ opacity: 1, transform: 'translate(0, 0)' })),
+      ]),
+    ])
+  ]
 })
 export class TodoComponent implements OnInit {
   // @ViewChild('box') box: ElementRef;
