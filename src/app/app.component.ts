@@ -19,9 +19,28 @@ import {
   animations: [
     trigger('routeAnimations', [
       transition('void => *', [
-        style({ opacity: 0, transform: 'translate(-600px, 0)', background: 'transparent'}),
+        style({ opacity: 0, transform: 'translateX(-100%)', background: 'transparent'}),
         animate('1.2s', style({ opacity: 1, transform: 'translate(0, 0)' })),
       ]),
+
+      transition('* <=> *', [
+        style({ position: 'relative' }),
+        query(':enter, :leave', [
+          style({
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%'
+          })
+        ]),
+        query(':enter', [style({ transform: 'translateX(-100%)', opacity: 0 })]),
+        query(':leave', animateChild()),
+        group([
+          query(':leave', [animate('1s ease-out', style({ transform: 'translateX(100%)', opacity: 0 }))]),
+          query(':enter', [animate('1s ease-out', style({ transform: 'translateX(0%)', opacity: 1 }))])
+         ]),
+         query(':enter', animateChild())
+       ])
 
       // transition('* => void', [
       //   animate(' 1.2s ', style({ opacity: 0 })),

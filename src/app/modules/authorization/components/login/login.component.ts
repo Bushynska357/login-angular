@@ -11,14 +11,6 @@ import { AuthService } from 'src/app/auth.service';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  animations: [
-    trigger('login', [
-      transition('void => *', [
-        style({ opacity: 0, transform: 'translate(-600px, 0)'}),
-        animate('1.2s', style({ opacity: 1, transform: 'translate(0, 0)' })),
-      ]),
-    ])
-  ]
 })
 export class LoginComponent implements OnInit {
 
