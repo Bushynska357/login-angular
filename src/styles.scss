@@ -8,6 +8,9 @@
     background-attachment: fixed;
 }
 
+body {
+    overflow-x: hidden;
+}
 
 .block{
     display: flex;
@@ -57,6 +60,9 @@
         .validation{
             background: #fff;
             color:#f37374;
+            small{
+                background: #fff;
+            }
         }
     }
     .btn{
