@@ -1,4 +1,4 @@
-<div @todo class="card">
+<div class="card">
 
     <div class="header">
         <div class="date">
@@ -17,7 +17,7 @@
             <input  type='checkbox' (change)="saveChanges(item)" [checked]="item.selected" [(ngModel)]="item.selected">
             <input class="text-input"   (blur)="saveChanges(item)"  name="task" placeholder="Enter task"  [(ngModel)]="item.text" />
             <div class="blockTime">
-                <div [ngClass]="{'time-hover':role}" class="time">{{item.time | date:"h:mm a"}}</div>
+                <div [ngClass]="{'time-hover':role}" class="time">{{(item.time | relative)}}</div>
                 <button (click)="removeTask(item)" *ngIf='role'>✖</button>
             </div>
         </div>      

@@ -8,9 +8,9 @@ import { AppComponent } from './app.component';
 import { AuthInterceptor } from './auth.interceptor';
 
 import { HttpErrorInterceptor } from './http-error.interceptor';
-
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MomentModule } from 'ngx-moment';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
