@@ -11,17 +11,8 @@ import { TodoService } from '../../todoService';
   selector: 'app-todo',
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.scss'],
-  animations: [
-    trigger('todo', [
-      transition('void => *', [
-        style({ opacity: 0, transform: 'translate(-600px, 0)'}),
-        animate('1.2s', style({ opacity: 1, transform: 'translate(0, 0)' })),
-      ]),
-    ])
-  ]
 })
 export class TodoComponent implements OnInit {
-  // @ViewChild('box') box: ElementRef;
 
   lengthList;
   tasks$: Observable<Task[]>;

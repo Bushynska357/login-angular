@@ -16,13 +16,6 @@ import { AuthRoutingModule } from './auth-routing.module';
     FormsModule,
     ReactiveFormsModule,
     AuthRoutingModule
-    // RouterModule.forChild(
-    //   [
-    //     {path: 'login', component: LoginComponent},
-    //     {path: 'register', component: RegisterComponent},
-    //     { path: '', redirectTo: 'login', pathMatch: 'full' }
-    //   ]
-    // ),
   ],
   exports: [RouterModule]
 })

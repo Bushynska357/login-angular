@@ -8,14 +8,6 @@ import { AuthService } from 'src/app/auth.service';
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
-  animations: [
-    trigger('register', [
-      transition('void => *', [
-        style({ opacity: 0, transform: 'translate(-600px, 0)'}),
-        animate('1.2s', style({ opacity: 1, transform: 'translate(0, 0)' })),
-      ]),
-    ])
-  ]
 })
 export class RegisterComponent implements OnInit {
 
