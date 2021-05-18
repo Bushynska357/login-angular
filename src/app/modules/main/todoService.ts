@@ -15,9 +15,7 @@ export class TodoService {
 
   constructor(private http: HttpClient,
               public authService: AuthService
-    ) {
-   
-    }
+    ) {}
 
   getTasks(): void{
    this.http.get<Task[]>(`${environment.baseUrl}/list`)
@@ -28,6 +26,7 @@ export class TodoService {
   }
 
   createTask(newTask): Subscription {
+    const params = { method: 'POST', body: newTask };
     return this.http.post<Task>(`${environment.baseUrl}/list`, newTask).subscribe(x => {
       newTask.id = x.id;
       console.log(newTask);

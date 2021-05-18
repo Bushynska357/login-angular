@@ -9,7 +9,7 @@ export class  RelativePipe implements PipeTransform {
 
       const now = +new Date();
       const sub = now - Number(value);
-      console.log(sub);
+
 
       if (sub < 60 * 60 * 1000){
          return moment(value).startOf('minute').fromNow();

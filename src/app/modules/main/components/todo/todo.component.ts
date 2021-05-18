@@ -29,7 +29,7 @@ export class TodoComponent implements OnInit {
 
   ngOnInit(): any{
     this.tasks$ = this.todoService.currentTask$.pipe(tap(console.log));
-    this.role = this.authService.isAdmin();
+    // this.role = this.authService.isAdmin();
     this.todoService.getTasks();
   }
 

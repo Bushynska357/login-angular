@@ -6,6 +6,8 @@ import { RouterModule } from '@angular/router';
 import {  OrdinalPipe } from 'src/app/ordinal.pipe';
 import { TodoRoutingModule } from './todo-routing.module';
 import { RelativePipe } from 'src/app/relative-time.pipe';
+import { AbilityModule } from '@casl/angular';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -15,7 +17,9 @@ import { RelativePipe } from 'src/app/relative-time.pipe';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    TodoRoutingModule
+    TodoRoutingModule,
+    AbilityModule,
+    SharedModule,
   ],
   exports: [RouterModule]
 })

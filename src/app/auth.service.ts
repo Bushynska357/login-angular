@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import { catchError, first, map, tap } from 'rxjs/operators';
 import { BehaviorSubject, from, Observable, of, throwError } from 'rxjs';
-import { User } from './models/user';
 import { CurrentUser } from './models/currentUser';
 import {environment} from '../environments/environment';
 import { Router } from '@angular/router';
+import { Ability, AbilityBuilder } from '@casl/ability';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -20,7 +21,8 @@ export class AuthService {
   public role: boolean;
 
   constructor(private http: HttpClient,
-              private router: Router) {
+              private router: Router,
+              private ability: Ability) {
     this.currentUser = this.getStorage();
     this.currentUserSubject = new BehaviorSubject<CurrentUser>(this.currentUser);
     this.currentUser$ = this.currentUserSubject.asObservable();
@@ -29,7 +31,7 @@ export class AuthService {
   login(email, password): Observable<any>{
     if (this.getStorage){
       this.removeCurrentStorage();
-    }
+  }
 
     return this.http.post<any>(`${environment.baseUrl}/auth/sign-in`, { email, password })
     .pipe(tap( user => {
@@ -43,6 +45,8 @@ export class AuthService {
             accessToken: user.accessToken,
             refreshToken: user.refreshToken
           };
+          console.log(user.data.role);
+          this.updateAbility(user.data.role);
           this.setStorage(user);
         }
       return user;
@@ -112,7 +116,28 @@ export class AuthService {
       );
     }
 
-    public isAdmin(): boolean{
-      return this.currentUser.data.role === 'admin';
+    private updateAbility(role) {
+      const { can, rules } = new AbilityBuilder<Ability>();
+
+      if (role === 'admin') {
+        can('update', 'all');
+        can('read', 'all');
+        can('delete', 'all');
+        can('delete', 'Todo');
+      } else if (role === 'user') {
+        can('create', 'Todo');
+      }
+
+      this.ability.update(rules);
     }
+
+
+
+    // public isAdmin(): boolean{
+    //   return this.currentUser.data.role === 'admin';
+    // }
 }
+function cannot(arg0: string, arg1: string) {
+  throw new Error('Function not implemented.');
+}
+
