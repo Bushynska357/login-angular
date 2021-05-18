@@ -18,7 +18,6 @@ import { SharedModule } from '../shared/shared.module';
     FormsModule,
     ReactiveFormsModule,
     TodoRoutingModule,
-    AbilityModule,
     SharedModule,
   ],
   exports: [RouterModule]
