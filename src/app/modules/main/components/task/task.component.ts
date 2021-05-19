@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Task } from 'src/app/models/task';
 import { TodoService } from '../../todoService';
 
@@ -22,11 +23,11 @@ export class TaskComponent implements OnInit {
     // console.log(this.item);
   }
 
-  saveChanges(item: Task) {
+  saveChanges(item: Task): Subscription {
     return this.todoService.updateTask(item);
   }
 
-  removeTask(item){
+  removeTask(item): Subscription {
     return this.todoService.removeTask(item);
   }
 

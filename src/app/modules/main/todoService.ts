@@ -34,14 +34,14 @@ export class TodoService {
     });
   }
 
-  updateTask(item) {
+  updateTask(item): Subscription {
    console.log(item);
    return this.http.put<Task>(`${environment.baseUrl}/list/${item.id}`, item).subscribe(x => {
     this.currentTaskSubject.next(this.currentTaskSubject.value.splice(item, item.id - 1, x));
    });
   }
 
-  removeTask(item) {
+  removeTask(item): Subscription {
     return this.http.delete<Task>(`${environment.baseUrl}/list/${item.id}`).subscribe(res => {
       this.currentTaskSubject.next(this.currentTaskSubject.value.filter(x => x.id !== res.id));
     });

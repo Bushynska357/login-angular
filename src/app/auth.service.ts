@@ -117,7 +117,7 @@ export class AuthService {
       );
     }
 
-    private updateAbility(role) {
+    private updateAbility(role): void {
       const { can, rules } = new AbilityBuilder<Ability>();
 
       if (role === 'admin') {
@@ -139,7 +139,5 @@ export class AuthService {
     //   return this.currentUser.data.role === 'admin';
     // }
 }
-function cannot(arg0: string, arg1: string) {
-  throw new Error('Function not implemented.');
-}
+
 

@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth.service';
 import { Task } from 'src/app/models/task';
@@ -33,7 +33,7 @@ export class TodoComponent implements OnInit {
     this.todoService.getTasks();
   }
 
-  addTask(){
+  addTask(): Subscription{
     const newTask = {
       isComplete: false,
       text: null,
