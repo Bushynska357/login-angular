@@ -30,6 +30,7 @@ export class TodoComponent implements OnInit {
   ngOnInit(): any{
     this.tasks$ = this.todoService.currentTask$.pipe(tap(console.log));
     // this.role = this.authService.isAdmin();
+  
     this.todoService.getTasks();
   }
 
@@ -43,11 +44,11 @@ export class TodoComponent implements OnInit {
     return this.todoService.createTask(newTask);
   }
 
-  saveChanges(item: Task) {
-    return this.todoService.updateTask(item);
-  }
+  // saveChanges(item: Task) {
+  //   return this.todoService.updateTask(item);
+  // }
 
-  removeTask(item){
-    return this.todoService.removeTask(item);
-  }
+  // removeTask(item){
+  //   return this.todoService.removeTask(item);
+  // }
 }

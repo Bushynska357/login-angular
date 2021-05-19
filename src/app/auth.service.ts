@@ -26,6 +26,7 @@ export class AuthService {
     this.currentUser = this.getStorage();
     this.currentUserSubject = new BehaviorSubject<CurrentUser>(this.currentUser);
     this.currentUser$ = this.currentUserSubject.asObservable();
+    this.updateAbility(this.currentUser.data.role);
   }
 
   login(email, password): Observable<any>{
@@ -126,6 +127,7 @@ export class AuthService {
         can('delete', 'Todo');
       } else if (role === 'user') {
         can('create', 'Todo');
+        can('update', 'all');
       }
 
       this.ability.update(rules);

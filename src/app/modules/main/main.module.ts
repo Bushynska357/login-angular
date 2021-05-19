@@ -8,11 +8,12 @@ import { TodoRoutingModule } from './todo-routing.module';
 import { RelativePipe } from 'src/app/relative-time.pipe';
 import { AbilityModule } from '@casl/angular';
 import { SharedModule } from '../shared/shared.module';
+import { TaskComponent } from './components/task/task.component';
 
 
 
 @NgModule({
-  declarations: [TodoComponent,  OrdinalPipe, RelativePipe ],
+  declarations: [TodoComponent, TaskComponent,  OrdinalPipe, RelativePipe, TaskComponent ],
   imports: [
     CommonModule,
     FormsModule,
