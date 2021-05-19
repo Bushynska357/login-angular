@@ -11,6 +11,7 @@ import { HttpErrorInterceptor } from './http-error.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MomentModule } from 'ngx-moment';
+import { SharedModule } from './modules/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { MomentModule } from 'ngx-moment';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    SharedModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

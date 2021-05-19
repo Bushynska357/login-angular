@@ -23,21 +23,22 @@ export class RegisterComponent implements OnInit {
       email: new FormControl('', [Validators.email, Validators.required]),
       fullname: new FormControl('', Validators.required),
       password: new FormControl(null, [Validators.required, Validators.minLength(6)]),
-      role: new FormControl('',Validators.required)
+      role: new FormControl('', Validators.required)
     });
   }
 
   submit(){
     if (this.form.valid){
-      this.authService.register( this.form.controls.email.value,this.form.controls.fullname.value,
+      this.authService.register( this.form.controls.email.value, this.form.controls.fullname.value,
          this.form.controls.password.value, this.form.controls.role.value)
       .subscribe(res => {
-     
+
         if (res){
           this.router.navigate(['', 'login']);
-       }else if (res == null){
-         window.alert('Something went wrong');
        }
+      //  else if (res == null){
+      //    window.alert('Something went wrong');
+      //  }
       }
       );
     }
@@ -47,7 +48,7 @@ export class RegisterComponent implements OnInit {
   onChange(event){
     console.log(event);
     console.log(this.form.controls.role.value);
-    
+
     this.selectedRole = event;
   }
 }

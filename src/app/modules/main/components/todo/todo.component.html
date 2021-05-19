@@ -8,7 +8,7 @@
         <div class="tasks">
             {{(tasks$ | async).length}} Tasks
         </div>
-        <button *ngIf='!role' type="button" class="addBtn" (click)="addTask()"><div class="plus">&#43;</div></button>
+        <button *ngIf="'create' | able: 'Todo'" type="button" class="addBtn" (click)="addTask()"><div class="plus">&#43;</div></button>
     </div>
     
     <div class="list-tasks"  *ngFor="let item of tasks$ | async">
@@ -17,8 +17,8 @@
             <input  type='checkbox' (change)="saveChanges(item)" [checked]="item.selected" [(ngModel)]="item.selected">
             <input class="text-input"   (blur)="saveChanges(item)"  name="task" placeholder="Enter task"  [(ngModel)]="item.text" />
             <div class="blockTime">
-                <div [ngClass]="{'time-hover':role}" class="time">{{(item.time | relative)}}</div>
-                <button (click)="removeTask(item)" *ngIf='role'>✖</button>
+                <div  [ngClass]="{'time-hover':!('create' | able: 'Todo')}" class="time">{{(item.time | relative)}}</div>
+                <button [ngClass]="{'delete-hover':('create' | able: 'Todo')}" (click)="removeTask(item)">✖</button>
             </div>
         </div>      
        
