@@ -20,7 +20,7 @@ export class TodoService {
   getTasks(): void{
    this.http.get<Task[]>(`${environment.baseUrl}/list`)
     .subscribe(res => {
-      this.currentTaskSubject.next(res);
+      this.currentTaskSubject.next(res.reverse());
       console.log(this.currentTaskSubject.value);
     });
   }
