@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Task } from 'src/app/models/task';
 import { TodoService } from '../../todoService';
