@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Task } from 'src/app/models/task';
 import { TodoService } from '../../todoService';
@@ -10,17 +10,14 @@ import { TodoService } from '../../todoService';
 })
 export class TaskComponent implements OnInit {
 
-
+  test;
   @Input() item: any;
-  // get item() {
-  //   console.log(this._item);
-  //   return this._item;
-  // }
+
 
   constructor(public todoService: TodoService) { }
 
   ngOnInit(): void {
-    // console.log(this.item);
+    this.test =  setInterval(() => this.test = Math.random() * 10, 1000);
   }
 
   saveChanges(item: Task): Subscription {

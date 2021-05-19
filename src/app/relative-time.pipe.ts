@@ -17,6 +17,5 @@ export class  RelativePipe implements PipeTransform {
         return moment(value).format('h:mm a');
      }
 
-
   }
 }
