@@ -9,14 +9,16 @@ import { TodoService } from '../../todoService';
   styleUrls: ['./task.component.scss']
 })
 export class TaskComponent implements OnInit {
-
+text;
   test;
   @Input() item: any;
-
+  
 
   constructor(public todoService: TodoService) { }
 
   ngOnInit(): void {
+    console.log();
+    
     this.test =  setInterval(() => this.test = Math.random() * 10, 1000);
   }
 

@@ -1,9 +1,9 @@
 <div class="task" >
     <input  type='checkbox' (change)="saveChanges(item)" [checked]="item.selected" [(ngModel)]="item.selected">
-    <app-input-task  [(content)]="item" (contentChange)="$event"></app-input-task>
-    <!-- <input class="text-input"   (blur)="saveChanges(item)"  name="task" placeholder="Enter task"  [(ngModel)]="item.text" /> -->
+    <app-input-task [(content)]="item.text" (contentChange)="saveChanges(item)"></app-input-task>
     <div class="blockTime">
         <div  [ngClass]="{'time-hover':!('create' | able: 'Todo')}" class="time">{{(item.time | relative:test)}}</div>
         <button [ngClass]="{'delete-hover':('create' | able: 'Todo')}" (click)="removeTask(item)">✖</button>
     </div>
 </div>   
+

@@ -1,1 +1,4 @@
-<input class="text-input" [value]="content.text"  (keyup.enter)="changeTask()"/>
+<p (click)="changeOnInput()" [style.display]="state?'block':'none'">{{content | substitute}}</p>
+<input class="text-input" [style.display]="!state?'block':'none'" [value]="content"  (keyup.enter)="changeTask($event)" (blur)='changeTask($event)' #input autofocus/>
+
+

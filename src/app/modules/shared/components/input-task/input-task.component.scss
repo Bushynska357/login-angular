@@ -2,18 +2,30 @@
     :host{
         background: #fff;
         width: 100%;
-        input{
-            background: #fff;
-            outline: none;
-            border: none;
-            font-family: 'Roboto', sans-serif;
-            font-size: 18px;
-            color: #82829c;
-            // width: 85%;
-            padding: 20px 10px;
-            &::placeholder {
-                color: #d6d6e4 ;
+    }
+    p{
+        background: #fff;
+    //    display: block;
+       padding: 20px 10px;
+        
+    }
+        
+    input{
+        width: 100%;
+        // display: none;
+        background: #fff;
+        outline: none;
+        border: none;
+        font-family: 'Roboto', sans-serif;
+        font-size: 18px;
+        color: #82829c;
+        // width: 85%;
+        padding: 20px 10px;
+
+        &::placeholder {
+            color: #d6d6e4 ;
         }
     }
    
-}
+    
+
